@@ -1,15 +1,13 @@
 
 package ohtu.verkkokauppa;
 
+import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
+@Component
 public class Kirjanpito implements IKirjanpito {
 
-    private ArrayList<String> tapahtumat;
-
-    public Kirjanpito() {
-        this.tapahtumat = new ArrayList<String>();
-    }
+    private ArrayList<String> tapahtumat = new ArrayList<String>();
     
     @Override
     public void lisaaTapahtuma(String tapahtuma) {
