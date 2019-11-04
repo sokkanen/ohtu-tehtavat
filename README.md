@@ -1,3 +1,3 @@
 # ohtu-tehtavat
 
-[Tehtävät 2-3](https://github.com/sokkanen/ohtu-viikko1)
+[Viikko2 - Tehtävät 2-3](https://github.com/sokkanen/ohtu-viikko1)
