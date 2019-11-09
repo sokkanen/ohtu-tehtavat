@@ -2,6 +2,8 @@ package ohtu;
 
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.Comparator;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class Main {
         Gson mapper = new Gson();
         List<Player> playerList = List.of(mapper.fromJson(bodyText, Player[].class));
 
+        System.out.println("Players from FIN on " + Instant.now().atOffset(ZoneOffset.UTC).toString() + " UTC \n");
         playerList.stream()
                 .filter(player -> player.nationality.equals("FIN"))
                 .sorted(Comparator.comparing(Player::getPoints, Comparator.reverseOrder())
