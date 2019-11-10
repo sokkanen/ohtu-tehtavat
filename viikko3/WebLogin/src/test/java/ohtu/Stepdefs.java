@@ -6,21 +6,18 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import static org.junit.Assert.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Stepdefs {
-    //WebDriver driver = new ChromeDriver();
-    WebDriver driver = new HtmlUnitDriver();
+    WebDriver driver = new FirefoxDriver();
     String baseUrl = "http://localhost:4567";
     
     @Given("login is selected")
     public void loginIsSelected() {
         driver.get(baseUrl);
-        WebElement element = driver.findElement(By.linkText("login"));       
-        element.click();   
+        clickLinkWithText("login", driver);
     }    
     
     @When("correct username {string} and password {string} are given")
@@ -57,6 +54,7 @@ public class Stepdefs {
     /* helper methods */
  
     private void pageHasContent(String content) {
+        sleep(1);
         assertTrue(driver.getPageSource().contains(content));
     }
         
@@ -67,6 +65,27 @@ public class Stepdefs {
         element = driver.findElement(By.name("password"));
         element.sendKeys(password);
         element = driver.findElement(By.name("login"));
-        element.submit();  
-    } 
+        sleep(1);
+        int idx = 0;
+        element.submit();
+    }
+
+    private static void sleep(int n){
+        try{
+            Thread.sleep(n*1000);
+        } catch(Exception e){}
+    }
+
+    private static void clickLinkWithText(String text, WebDriver driver) {
+        int trials = 0;
+        while( trials++<5 ) {
+            try{
+                WebElement element = driver.findElement(By.linkText(text));
+                element.click();
+                break;
+            } catch(Exception e) {
+                System.out.println(e.getStackTrace());
+            }
+        }
+    }
 }
