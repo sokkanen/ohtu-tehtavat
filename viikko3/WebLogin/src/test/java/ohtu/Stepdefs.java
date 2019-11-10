@@ -15,6 +15,7 @@ import java.util.Random;
 public class Stepdefs {
     WebDriver driver = new FirefoxDriver();
     String baseUrl = "http://localhost:4567";
+    String validUser = "";
     
     @Given("login is selected")
     public void loginIsSelected() {
@@ -85,6 +86,31 @@ public class Stepdefs {
         createUserWith(username, password, passwordConfirmation, true);
     }
 
+    @Given("user with username {string} with password {string} is successfully created")
+    public void createAValidUser(String username, String password){
+        newUserIsSelected();
+        createUserWith(username, password, password, true);
+        clickLinkWithText("logout", driver);
+    }
+
+    @When("logging in with newly created valid user {string} with password {string}")
+    public void correctNewUserUsernameAndPasswordAreGiven(String username, String password) {
+        loginIsSelected();
+        logInWith(validUser, password);
+    }
+
+    @Given("user with username {string} and password {string} is tried to be created")
+    public void tryToCreateANonValidUser(String username, String password){
+        newUserIsSelected();
+        createUserWith(username, password, password, false);
+        clickLinkWithText("back to home", driver);
+    }
+
+    @When("non created username {string} and password {string} are entered")
+    public void notCreatedUsernameAndPasswordAreGiven(String username, String password) {
+        logInWith(username, password);
+    }
+
     @After
     public void tearDown(){
         driver.quit();
@@ -118,7 +144,8 @@ public class Stepdefs {
             char a3 = alphabet.charAt(r.nextInt(alphabet.length()));
             char a4 = alphabet.charAt(r.nextInt(alphabet.length()));
             char a5 = alphabet.charAt(r.nextInt(alphabet.length()));
-            element.sendKeys(username + a1 + a2 + a3 + a4 + a5);
+            validUser = username + a1 + a2 + a3 + a4 + a5;
+            element.sendKeys(validUser);
         } else {
             element.sendKeys(username);
         }
