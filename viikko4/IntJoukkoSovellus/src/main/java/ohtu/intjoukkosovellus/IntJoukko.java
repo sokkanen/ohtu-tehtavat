@@ -6,19 +6,19 @@ import java.util.Arrays;
 
 public class IntJoukko {
 
-    public final static int kapasiteetti = 5;
+    public final static int KAPASITEETTI = 5;
     private int kasvatusKoko = 5;
     private int[] lukuLista;
 
     public IntJoukko() {
-        this.lukuLista = alustaUusiJoukko();
+        this.lukuLista = alustaUusiJoukko(KAPASITEETTI, kasvatusKoko);
     }
 
-    public IntJoukko(int koko) {
-        if (koko < 0) {
+    public IntJoukko(int kasvatusKoko) {
+        if (kasvatusKoko < 0) {
             throw new IntJoukkoException("Epäkelpo alustusparametri");
         }
-        this.lukuLista = alustaUusiJoukko(koko);
+        this.lukuLista = alustaUusiJoukko(KAPASITEETTI, kasvatusKoko);
     }
 
     public IntJoukko(int kapasiteetti, int kasvatuskoko) {
@@ -26,14 +26,6 @@ public class IntJoukko {
             throw new IntJoukkoException("Epäkelpo alustusparametri");
         }
         this.lukuLista = alustaUusiJoukko(kapasiteetti, kasvatuskoko);
-    }
-
-    public int[] alustaUusiJoukko(){
-        return alustaUusiJoukko(kapasiteetti, kasvatusKoko);
-    }
-
-    public int[] alustaUusiJoukko(int kapasiteetti){
-        return alustaUusiJoukko(kapasiteetti, kasvatusKoko);
     }
 
     public int[] alustaUusiJoukko(int kapasiteetti, int kasvatus){
