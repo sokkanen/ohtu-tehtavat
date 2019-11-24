@@ -11,6 +11,7 @@ public class Erotus extends Komento {
     private Button nollaa;
     private Button undo;
     private Sovelluslogiikka sovellus;
+    private int edellinenTulos;
 
     public Erotus(TextField tuloskentta,
                   TextField syotekentta,
@@ -22,10 +23,12 @@ public class Erotus extends Komento {
         this.nollaa = nollaa;
         this.undo = undo;
         this.sovellus = sovellus;
+        this.edellinenTulos = 0;
     }
 
     @Override
     public void suorita() {
+        this.edellinenTulos = sovellus.tulos();
         int arvo = 0;
         try {
             arvo = Integer.parseInt(syotekentta.getText());
@@ -45,6 +48,9 @@ public class Erotus extends Komento {
 
     @Override
     public void peru() {
-
+        sovellus.setTulos(edellinenTulos);
+        syotekentta.setText("");
+        tuloskentta.setText("" + sovellus.tulos());
+        undo.disableProperty().set(true);
     }
 }
