@@ -14,6 +14,6 @@ public class Or implements Matcher {
 
     @Override
     public boolean matches(Player p) {
-        return Arrays.stream(matchers).filter(m -> m.matches(p)).count() > 0;
+        return Arrays.stream(matchers).anyMatch(m -> m.matches(p));
     }
 }

@@ -2,14 +2,20 @@ package statistics.matcher;
 
 public class QueryBuilder {
 
-    Matcher matcher;
+    public Matcher matcher;
 
     public QueryBuilder(){
         matcher = new All();
     }
 
+    public QueryBuilder(Matcher matcher){
+        this.matcher = matcher;
+    }
+
     public Matcher build(){
-        return matcher;
+        Matcher finished = matcher;
+        this.matcher = new All();
+        return finished;
     }
 
     public QueryBuilder hasAtLeast(int value, String category){
@@ -24,6 +30,11 @@ public class QueryBuilder {
 
     public QueryBuilder playsIn(String team){
         matcher = new And(matcher, new PlaysIn(team));
+        return this;
+    }
+
+    public QueryBuilder oneOf(Matcher... matchers){
+        matcher = new Or(matchers);
         return this;
     }
 }
