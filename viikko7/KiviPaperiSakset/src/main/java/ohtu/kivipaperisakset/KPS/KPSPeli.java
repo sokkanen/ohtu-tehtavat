@@ -6,14 +6,14 @@ import ohtu.kivipaperisakset.Tuomari;
 
 public class KPSPeli implements KPS {
 
-    private boolean onTekoaly;
-    private IO io;
-    private Tuomari tuomari;
-    private Tekoaly tekoaly;
+    private final IO io;
+    private final Tuomari tuomari;
+    private final Tekoaly tekoaly;
     private String ekanSiirto;
     private String tokanSiirto;
+    private boolean onTekoaly;
 
-    public KPSPeli(IO io, Tuomari tuomari, Tekoaly tekoaly){
+    private KPSPeli(IO io, Tuomari tuomari, Tekoaly tekoaly){
         this.io = io;
         this.tuomari = tuomari;
         this.tekoaly = tekoaly;
@@ -61,5 +61,9 @@ public class KPSPeli implements KPS {
 
     private static boolean onkoOkSiirto(String siirto) {
         return "k".equals(siirto) || "p".equals(siirto) || "s".equals(siirto);
+    }
+
+    public static KPSPeli from(IO io, Tuomari tuomari, Tekoaly tekoaly){
+        return new KPSPeli(io, tuomari, tekoaly);
     }
 }

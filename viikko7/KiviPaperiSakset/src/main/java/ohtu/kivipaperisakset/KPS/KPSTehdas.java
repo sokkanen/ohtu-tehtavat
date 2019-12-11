@@ -18,12 +18,13 @@ public class KPSTehdas {
         this.io = io;
         this.pelit = new HashMap<>();
         this.tuomari = tuomari;
-        pelit.put("a", new KPSPeli(io, tuomari, null));
-        pelit.put("b", new KPSPeli(io, tuomari, new TekoalyTyhma()));
-        pelit.put("c", new KPSPeli(io, tuomari, new TekoalyParannettu(vaikeusAste)));
+        pelit.put("a", KPSPeli.from(io, tuomari, null));
+        pelit.put("b", KPSPeli.from(io, tuomari, new TekoalyTyhma()));
+        pelit.put("c", KPSPeli.from(io, tuomari, new TekoalyParannettu(vaikeusAste)));
     }
 
     public KPS haePeli(String haettu) {
         return haettu.length() != 0 ? pelit.getOrDefault(haettu.substring(haettu.length() - 1), null) : null;
     }
+
 }

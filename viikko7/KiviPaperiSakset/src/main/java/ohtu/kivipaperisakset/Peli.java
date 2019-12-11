@@ -7,9 +7,9 @@ import ohtu.kivipaperisakset.KPS.KPSTehdas;
 
 public class Peli {
 
-    IO io = new KonsoliIO();
-    Tuomari tuomari = new Tuomari();
-    KPSTehdas tehdas = new KPSTehdas(io, 20, tuomari);
+    private IO io = new KonsoliIO();
+    private Tuomari tuomari = new Tuomari();
+    private KPSTehdas tehdas = new KPSTehdas(io, 20, tuomari);
 
     public void kaynnista(){
         while (true) {
